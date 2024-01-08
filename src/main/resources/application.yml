@@ -1,0 +1,52 @@
+server:
+  port: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: rabbit-messages-reader
+  rabbitmq:
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 1
+    template:
+      exchange: ${RABBIT_EXCHANGE_NAME:example}
+    addresses: amqp://admin:admin@localhost:5672
+clevertec:
+  rabbit:
+    consumer:
+      queues:
+        names:
+          account-info:
+            ${ACCOUNT_INFO_QUEUE_NAME:account_info}
+          card-info:
+            ${CARD_INFO_QUEUE_NAME:card-info}
+          credit-details:
+            ${CREDIT_DETAILS_QUEUE_NAME:credit-details}
+          currency-rate:
+            ${CURRENCY_RATE_QUEUE_NAME:currency-rate}
+          customer:
+            ${CUSTOMER_QUEUE_NAME:customer}
+          deposit-info:
+            ${DEPOSIT_INFO_QUEUE_NAME:deposit_info}
+  feign:
+    service:
+      name:
+        account-client: "SPRINGBOOTHW"
+        card-client: "1"
+        credit-client: "2"
+        customer-client: "3"
+        deposit-client: "4"
+
+      path:
+        account-client-path: "/from_rabbit"
+        card-client-path:
+        credit-client-path:
+        customer-client-path:
+        deposit-client-path:
