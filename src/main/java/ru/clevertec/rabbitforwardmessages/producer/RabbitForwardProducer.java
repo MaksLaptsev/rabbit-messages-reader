@@ -28,20 +28,23 @@ public class RabbitForwardProducer {
     private String forwardExchange;
 
 
-    public RabbitForwardProducer(@Qualifier("forwardTemplate") RabbitTemplate rabbitTemplate,ObjectMapper objectMapper,ApplicationContext context){
+    public RabbitForwardProducer(@Qualifier("forwardTemplate") RabbitTemplate rabbitTemplate, ObjectMapper objectMapper,ApplicationContext context){
         this.rabbitTemplate = rabbitTemplate;
         this.objectMapper = objectMapper;
         this.context = context;
     }
 
+
+    /**
+     * Продюсер копирует из сообщения header, добавляет его к MessageProperties и отправляет в другой instance кролика
+     * @param message Сообщение пришедшее из кроля
+     */
     public void produceMessageWithHeaders(String message) {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
         messageProperties.setHeaders(getHeaders(message));
 
         Optional.of(message)
-                .map(this::getPayload)
-                .map(x -> {log.info(x); return x;})
                 .map(String::getBytes)
                 .map(bytes -> new Message(bytes, messageProperties))
                 .ifPresent(msg ->
@@ -49,6 +52,11 @@ public class RabbitForwardProducer {
                 );
     }
 
+    /**
+     *
+     * @param mess - сообщение, из которого достаются хидеры
+     * @return мапа с хидерами, которые будут добавлены в MessageProperties
+     */
     @SneakyThrows
     private Map<String, Object> getHeaders(String mess) {
         JsonNode node = objectMapper.readTree(mess);
@@ -56,11 +64,5 @@ public class RabbitForwardProducer {
                 = new TypeReference<HashMap<String, Object>>() {
         };
         return objectMapper.readValue(node.get("header").toString(), typeRef);
-    }
-
-    @SneakyThrows
-    private String getPayload(String mess) {
-        JsonNode node = objectMapper.readTree(mess);
-        return node.get("payload").toString();
     }
 }

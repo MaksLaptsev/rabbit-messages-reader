@@ -4,18 +4,17 @@ spring:
   application:
     name: rabbit-forward-service
   rabbitmq:
-    addresses: amqp://admin:admin@localhost:5672 # адрес кролика, где загрузочные данные
+    addresses: amqp://admin:admin@localhost:5670 # адрес кролика, где загрузочные данные(Который Макс даст)
     listener:
       simple:
         acknowledge-mode: auto
         prefetch: 1
     consumer:
       config:
-        queue-name: default  #название очереди, с которой читаем
-        exchange-name: default #нахвание обменника
+        queue-name: default  #название очереди, с которой читаем первичные данные
+        exchange-name: default #название обменника, с первичными данными
         key: routingKey
     producer:
       config:
-        forward-exchange: example #exchange - куда перенаправляем
-        addresses: amqp://admin:admin@localhost:5673 #адрес нашего кролика, с которого считываем
-
+        forward-exchange: banking #exchange нашего кролика - куда перенаправляем
+        addresses: amqp://clevertec:banking@localhost:5672 #адрес нашего кролика, с которого потом в сервисах считываем
