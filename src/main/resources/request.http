@@ -1,0 +1,545 @@
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "account_info"
+  },
+  "payload": {
+    "name": "Название number 1",
+    "iban": "FFFFCCCDDDDEEEEEEEEEEEEWESSS",
+    "iban_readable": "AABB CCC DDDD EEEE EEEE EEEE EEEE",
+    "amount": 222100.00,
+    "currency_code": "EUR",
+    "open_date": "01.12.2001",
+    "main_acc": true,
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "customer_type" : "LEGAL",
+    "rate": 0.01
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "deposit_info"
+  },
+  "payload": {
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "customer_type" : "LEGAL",
+    "acc_info": {
+      "acc_iban": "AABBCCCDDDDEEEEEEEEEEEEEEEE",
+      "acc_open_date": "01.12.2001",
+      "curr_amount": 3000.00,
+      "curr_amount_currency": "BYN"
+    },
+    "dep_info": {
+      "rate": 14.50,
+      "term_val": 24,
+      "term_scale": "M",
+      "exp_date": "01.12.2002",
+      "dep_type": "REVOCABLE",
+      "auto_renew": true
+    }
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "5200000000045547",
+    "card_number_readable": "5200 0000 0000 1096",
+    "iban": "FFFFCCCDDDDEEEEEEEEEEEEEEEEG",
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "customer_type" : "LEGAL",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "ACTIVE"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "5200000300001088",
+    "card_number_readable": "5200 0000 0000 1088",
+    "iban": "FFFFCCCDDDDEEEEEEEEEEEEWESSS",
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "customer_type" : "LEGAL",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "ACTIVE"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "credit-details"
+  },
+  "payload": {
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "contractNumber": "11-0216444-2-0",
+    "contractStartDate": "30.03.2003",
+    "totalDebt": 8113.99,
+    "currentDebt": 361.99,
+    "currency": "BYN",
+    "repaymentDate": "16.01.2003",
+    "rate": 22.8,
+    "iban": "AABBCCCDDDDEEEEEEEEEEEEEEEE",
+    "possibleRepayment": true,
+    "isClosed": false,
+    "customer_type" : "LEGAL"
+  }
+}
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "credit-details"
+  },
+  "payload": {
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "contractNumber": "11-0216133-2-0",
+    "contractStartDate": "10.01.2000",
+    "totalDebt": 999999.00,
+    "currentDebt": 3020.00,
+    "currency": "BYN",
+    "repaymentDate": "16.05.2025",
+    "rate": 22.8,
+    "iban": "DE89370400440532013000234567",
+    "possibleRepayment": true,
+    "isClosed": false,
+    "customer_type": "PHYSIC"
+  }
+}
+
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "customer"
+  },
+  "payload": {
+    "customer_id": "1a72a05f-4b8f-43c5-a889-1ebc6d9dc729",
+    "customer_type" : "LEGAL",
+    "unp": "123456789",
+    "register_date": "01.12.2001",
+    "email": "example@email.com",
+    "phoneCode": "37529",
+    "phoneNumber": "1112233",
+    "customer_fullname": "Иванов Иван Иванович"
+  }
+}
+########## 1
+
+###
+
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "currency-rate"
+  },
+  "payload": {
+    "startDt": "2024-01-20T14:56:51.604498616+03:00",
+    "exchangeRates": [
+      {
+        "buyRate": 3.33,
+        "sellRate": 3.43,
+        "srcCurr": "EUR",
+        "reqCurr": "BYN"
+      },
+      {
+        "buyRate": 3.05,
+        "sellRate": 3.15,
+        "srcCurr": "USD",
+        "reqCurr": "BYN"
+      },
+      {
+        "id": 5,
+        "buyRate": 1.075,
+        "sellRate": 1.1,
+        "srcCurr": "EUR",
+        "reqCurr": "USD"
+      }
+    ]
+  }
+}
+### 2
+
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "account_info"
+  },
+  "payload": {
+    "name": "Название счёта 2",
+    "iban": "RU42100203003212345678012345",
+    "iban_readable": "RU42 1002 0300 3212 3456 7801 2345",
+    "amount": 3500.00,
+    "currency_code": "933",
+    "open_date": "01.12.2011",
+    "main_acc": true,
+    "customer_id": "a3e8c29f-7c16-4a5d-b1c1-2d32f31a8d71",
+    "customer_type" : "LEGAL",
+    "rate": 0.01
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "deposit_info"
+  },
+  "payload": {
+    "customer_id": "a3e8c29f-7c16-4a5d-b1c1-2d32f31a8d71",
+    "customer_type" : "LEGAL",
+    "acc_info": {
+      "acc_iban": "RU42100203003212345678012345",
+      "acc_open_date": "01.12.2011",
+      "curr_amount": 31000.00,
+      "curr_amount_currency": "BYN"
+    },
+    "dep_info": {
+      "rate": 14.50,
+      "term_val": 24,
+      "term_scale": "M",
+      "exp_date": "01.12.2011",
+      "dep_type": "REVOCABLE",
+      "auto_renew": true
+    }
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "4532015112890366",
+    "card_number_readable": "4532 0151 1289 0366",
+    "iban": "RU42100203003212345678012345",
+    "customer_id": "a3e8c29f-7c16-4a5d-b1c1-2d32f31a8d71",
+    "customer_type" : "LEGAL",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "ACTIVE"
+  }
+}
+###
+
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "credit-details"
+  },
+  "payload": {
+    "customer_id": "a3e8c29f-7c16-4a5d-b1c1-2d32f31a8d71",
+    "contractNumber": "11-0216433-2-0",
+    "contractStartDate": "30.03.2012",
+    "totalDebt": 8351.99,
+    "currentDebt": 500.99,
+    "currency": "BYN",
+    "repaymentDate": "16.01.2012",
+    "rate": 24.8,
+    "iban": "AABBCCCDDDDEEEEEEEEEEEEEEEE",
+    "possibleRepayment": true,
+    "isClosed": false,
+    "customer_type" : "LEGAL"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "customer"
+  },
+  "payload": {
+    "customer_id": "a3e8c29f-7c16-4a5d-b1c1-2d32f31a8d71",
+    "customer_type" : "LEGAL",
+    "unp": "987654321",
+    "register_date": "01.12.2011",
+    "email": "example2@email.com",
+    "phoneCode": "37529",
+    "phoneNumber": "6543217",
+    "customer_fullname": "Иванов Иван Иванович"
+  }
+}
+##########
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "account_info"
+  },
+  "payload": {
+    "name": "Название счёта 3",
+    "iban": "DE89370400440532013000234567",
+    "iban_readable": "DE89 3704 0044 0532 0130 0023 4567",
+    "amount": 21500.00,
+    "currency_code": "933",
+    "open_date": "01.12.2020",
+    "main_acc": true,
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "customer_type" : "PHYSIC",
+    "rate": 0.01
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "deposit_info"
+  },
+  "payload": {
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "customer_type" : "PHYSIC",
+    "acc_info": {
+      "acc_iban": "DE89370400440532013000234567",
+      "acc_open_date": "01.12.2020",
+      "curr_amount": 700.00,
+      "curr_amount_currency": "BYN"
+    },
+    "dep_info": {
+      "rate": 16.50,
+      "term_val": 24,
+      "term_scale": "M",
+      "exp_date": "01.12.2020",
+      "dep_type": "REVOCABLE",
+      "auto_renew": true
+    }
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "5218347602398745",
+    "card_number_readable": "5218 3476 0239 8745",
+    "iban": "DE89370400440532013000234567",
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "customer_type" : "PHYSIC",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "ACTIVE"
+  }
+}
+###
+
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "credit-details"
+  },
+  "payload": {
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "contractNumber": "11-0216111-2-0",
+    "contractStartDate": "30.03.2020",
+    "totalDebt": 7000.00,
+    "currentDebt": 300.00,
+    "currency": "BYN",
+    "repaymentDate": "16.01.2020",
+    "rate": 22.8,
+    "iban": "DE89370400440532013000234567",
+    "possibleRepayment": true,
+    "isClosed": false,
+    "customer_type" : "PHYSIC"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "customer"
+  },
+  "payload": {
+    "customer_id": "fbd6a92b-9e43-4c88-aa2b-6e1fe788d9c4",
+    "customer_type" : "PHYSIC",
+    "unp": "",
+    "register_date": "01.12.2020",
+    "email": "example3@email.com",
+    "phoneCode": "37529",
+    "phoneNumber": "4564566",
+    "customer_fullname": "НеИванов НеИван НеИванович"
+  }
+}
+########## 3
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "account_info"
+  },
+  "payload": {
+    "name": "Название счёта 3",
+    "iban": "US58469159383322778899012345",
+    "iban_readable": "US58 4691 5938 3322 7788 9901 2345",
+    "amount": 1500.00,
+    "currency_code": "933",
+    "open_date": "01.12.2006",
+    "main_acc": true,
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "customer_type" : "PHYSIC",
+    "rate": 0.01
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "deposit_info"
+  },
+  "payload": {
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "customer_type" : "PHYSIC",
+    "acc_info": {
+      "acc_iban": "US58469159383322778899012345",
+      "acc_open_date": "01.12.2006",
+      "curr_amount": 700.00,
+      "curr_amount_currency": "BYN"
+    },
+    "dep_info": {
+      "rate": 19.50,
+      "term_val": 24,
+      "term_scale": "M",
+      "exp_date": "01.12.2007",
+      "dep_type": "REVOCABLE",
+      "auto_renew": true
+    }
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "3786543201987456",
+    "card_number_readable": "3786 5432 0198 7456",
+    "iban": "US58469159383322778899012345",
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "customer_type" : "PHYSIC",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "ACTIVE"
+  }
+}
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "card-info"
+  },
+  "payload": {
+    "card_number": "4857263091275043",
+    "card_number_readable": "4857 2630 9127 5043",
+    "iban": "US58469159383322778899012345",
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "customer_type" : "PHYSIC",
+    "cardholder": "CARDHOLDER NAME",
+    "card_status": "INACTIVE"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "credit-details"
+  },
+  "payload": {
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "contractNumber": "11-0218001-2-0",
+    "contractStartDate": "30.03.2008",
+    "totalDebt": 5500.00,
+    "currentDebt": 123.99,
+    "currency": "BYN",
+    "repaymentDate": "16.01.2010",
+    "rate": 22.8,
+    "iban": "AABBCCCDDDDEEEEEEEEEEEEEEEE",
+    "possibleRepayment": true,
+    "isClosed": false,
+    "customer_type" : "PHYSIC"
+  }
+}
+
+###
+POST http://localhost:8816/api/messages/publish
+Content-Type: application/json
+
+{
+  "header": {
+    "message_type": "customer"
+  },
+  "payload": {
+    "customer_id": "8a7b3f5e-6d12-47f9-8c9a-1fcb4d3c928f",
+    "customer_type" : "PHYSIC",
+    "unp": "",
+    "register_date": "01.12.2006",
+    "email": "example4@email.com",
+    "phoneCode": "37544",
+    "phoneNumber": "4444444",
+    "customer_fullname": "Фамилия Имя Отчество"
+  }
+}

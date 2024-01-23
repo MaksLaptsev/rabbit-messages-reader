@@ -1,0 +1,25 @@
+server:
+  port: 8816
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: rabbit-forward-service
+  rabbitmq:
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 1
+    template:
+      exchange: example
+    addresses: amqp://admin:admin@localhost:5670 #uri кроля, который типо первоначальный источник данных
+clevertec:
+  rabbit:
+    config:
+      exchange-name-with-all-data: default #имя обменника, куда первоначально заполняем(через ендпоинт колнтроллера)
+
